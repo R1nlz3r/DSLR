@@ -24,6 +24,19 @@ def sum_up_stats(tmp_stats, sanitized_col):
 				(sanitized_col[percentile + 1] - sanitized_col[percentile]) * decimal
 	return tmp_stats
 
+def display_stats(stats):
+	labels = ["", "Count", "Mean", "Std", "Min", "25%", "50%", "75%", "Max"]
+	lines, columns = np.shape(stats)
+	for i in range(0, lines + 1):
+		sys.stdout.write("%-8s" % labels[i])
+		for j in range(0, columns):
+			if i == 0:
+				sys.stdout.write("%12s %2d " % ("Feature", j + 1))
+			else:
+				sys.stdout.write("%15.6f " % stats[i - 1][j])
+		sys.stdout.write("\n")
+
+
 def main():
 	data = load_data()
 	try:
@@ -50,6 +63,7 @@ def main():
 				stats = np.vstack([stats, tmp_stats])
 			else:
 				stats = tmp_stats
+	display_stats(stats.T)
 
 if __name__ == "__main__":
 	main()
