@@ -34,8 +34,8 @@ def main():
 					edgecolors = "none")
 			plt.xlabel(data_str[0, i])
 			plt.ylabel(data_str[0, j])
-			plt.legend(["Ravenclaw", "Slytherin", "Gryffindor", \
-				"Hufflepuff"], fontsize = "small")
+			plt.legend(["Ravenclaw", "Slytherin", "Gryffindor", "Hufflepuff"], \
+				fontsize = "small")
 			plt.show()
 
 if __name__ == "__main__":
