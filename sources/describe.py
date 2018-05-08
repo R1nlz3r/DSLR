@@ -5,7 +5,7 @@ def load_data():
 	try:
 		data = np.genfromtxt(sys.argv[1], delimiter = ',')
 	except:
-		print "Error"
+		print("Error")
 		exit()
 	return data
 
@@ -16,7 +16,7 @@ def sum_up_stats(tmp_stats, sanitized_col):
 	for i in range(1, 4):
 		percentile = (tmp_stats[0][0] - 1) * i * 0.25
 		decimal = percentile - np.floor(percentile)
-		percentile = np.floor(percentile)
+		percentile = int(np.floor(percentile))
 		if tmp_stats[0][0] == 1:
 			tmp_stats[0][i + 3] = sanitized_col[percentile]
 		else:
@@ -42,7 +42,7 @@ def main():
 	try:
 		lines, columns = np.shape(data)
 	except:
-		print "Error"
+		print("Error")
 		exit()
 	for i in range(0, columns):
 		tmp_stats = np.zeros((1, 8))
