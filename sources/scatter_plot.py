@@ -23,7 +23,7 @@ def main():
 		data_str = np.genfromtxt("../resources/dataset_train.csv",\
 		 	delimiter = ',', dtype = np.str)
 	except:
-		print "Error"
+		print("Error")
 		exit()
 	colors = ['r', 'b', 'g', 'y']
 	for i in range(6, data.shape[1]):
@@ -31,7 +31,7 @@ def main():
 			for k in range (0, 4):
 				plt.scatter(get_col(data, data_str, i)[k], \
 					get_col(data, data_str, j)[k], c = colors[k], \
-					edgecolors = "none")
+					edgecolors = "none", alpha = 0.8)
 			plt.xlabel(data_str[0, i])
 			plt.ylabel(data_str[0, j])
 			plt.legend(["Ravenclaw", "Slytherin", "Gryffindor", "Hufflepuff"], \
