@@ -27,7 +27,7 @@ def main():
 		data_str = np.genfromtxt("../resources/dataset_train.csv",\
 		 	delimiter = ',', dtype = np.str)
 	except:
-		print "Error"
+		print("Error")
 		exit()
 	for i in range(6, data.shape[1]):
 		plt.hist(get_col(data, data_str, i), bins = 15, \
