@@ -1,6 +1,26 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+def get_data():
+	try:
+		data = np.genfromtxt("../resources/dataset_train.csv", delimiter = ',')
+		data_str = np.genfromtxt("../resources/dataset_train.csv",\
+		 	delimiter = ',', dtype = np.str)
+	except:
+		print("Error")
+		exit()
+	best_hand = np.where(data_str == "Best Hand")[1]
+	data_str[np.where(data_str == "Left")[0], best_hand] = 1
+	data_str[np.where(data_str == "Right")[0], best_hand] = 2
+	data[1:, best_hand] = data_str[1:, best_hand]
+	birthday = np.where(data_str == "Birthday")[1]
+	for i in range(1, len(data_str)):
+		nb_bday = data_str[i, birthday]
+		data[i, birthday] = int(nb_bday[0][:4]) + \
+			(int(nb_bday[0][5:7]) / 120 * 10) + \
+			(int(nb_bday[0][8:9]) / 3100 * 10)
+	return data, data_str
+
 def get_col(data, data_str, column):
 	ravenclaw = np.array([])
 	slytherin = np.array([])
@@ -18,15 +38,9 @@ def get_col(data, data_str, column):
 	return ravenclaw, slytherin, gryffindor, hufflepuff
 
 def main():
-	try:
-		data = np.genfromtxt("../resources/dataset_train.csv", delimiter = ',')
-		data_str = np.genfromtxt("../resources/dataset_train.csv",\
-		 	delimiter = ',', dtype = np.str)
-	except:
-		print("Error")
-		exit()
+	data, data_str = get_data()
 	colors = ['r', 'b', 'g', 'y']
-	for i in range(6, data.shape[1]):
+	for i in range(4, data.shape[1]):
 		for j in range(i + 1, data.shape[1]):
 			for k in range (0, 4):
 				plt.scatter(get_col(data, data_str, i)[k], \
