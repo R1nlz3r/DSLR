@@ -1,6 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+def get_data():
+	try:
+		data = np.genfromtxt("../resources/dataset_train.csv", delimiter = ',')
+		data_str = np.genfromtxt("../resources/dataset_train.csv",\
+		 	delimiter = ',', dtype = np.str)
+	except:
+		print("Error")
+		exit()
+	return data, data_str
+
 def get_col(data, data_str, column):
 	ravenclaw = np.array([])
 	slytherin = np.array([])
@@ -22,14 +32,8 @@ def get_col(data, data_str, column):
 	return ravenclaw, slytherin, gryffindor, hufflepuff
 
 def main():
-	try:
-		data = np.genfromtxt("../resources/dataset_train.csv", delimiter = ',')
-		data_str = np.genfromtxt("../resources/dataset_train.csv",\
-		 	delimiter = ',', dtype = np.str)
-	except:
-		print("Error")
-		exit()
-	for i in range(6, data.shape[1]):
+	data, data_str = get_data()
+	for i in range(4, data.shape[1]):
 		plt.hist(get_col(data, data_str, i), bins = 15, \
 			histtype = "stepfilled", alpha = 0.8, color = ['y', 'g', 'b', 'r'])
 		plt.title(data_str[0, i])
