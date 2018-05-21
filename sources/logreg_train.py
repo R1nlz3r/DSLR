@@ -101,8 +101,8 @@ def main():
 	alpha = [0.01, 0.03, 0.1, 0.3, 1, 3]
 	power = [1, 2, 3]
 	count = 1
-	print("Feature1", "Feature2", "House id", "Best Accuracy", "Best alpha", \
-		"Best power", "Theta")
+	print("Feature1", "Feature2", "House id", "Accuracy", "Alpha", "Power", \
+		"Theta")
 	for house_id in range(0, 4):
 		for feature_1 in range(6, data.shape[1] - 4):
 			for feature_2 in range(feature_1 + 1, data.shape[1] - 4):
@@ -126,11 +126,12 @@ def main():
 						iterations, best_alpha, best_power, plot = True)
 					print(feature_1, feature_2, house_id, best_score, \
 						best_alpha, best_power, best_theta.T)
-					tmp_save = np.zeros((1, max(power) * 2 + 4))
+					tmp_save = np.zeros((1, max(power) * 2 + 5))
 					tmp_save[0, 0] = feature_1
 					tmp_save[0, 1] = feature_2
-					tmp_save[0, 2] = house_id
-					tmp_save[0, 3:best_theta.T.shape[1] + 3] = best_theta.T
+					tmp_save[0, 2] = best_power
+					tmp_save[0, 3] = house_id
+					tmp_save[0, 4:best_theta.T.shape[1] + 4] = best_theta.T
 					try:
 						save = np.vstack((save, tmp_save))
 					except:
